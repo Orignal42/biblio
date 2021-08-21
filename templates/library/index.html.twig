@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library index{% endblock %}
+
+{% block body %}
+    <h1>Library index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Editor</th>
+                <th>Price</th>
+                <th>Event</th>
+                <th>Protected</th>
+                <th>Competition</th>
+                <th>Fiction</th>
+                <th>Public</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for library in libraries %}
+            <tr>
+                <td>{{ library.id }}</td>
+                <td>{{ library.title }}</td>
+                <td>{{ library.author }}</td>
+                <td>{{ library.editor }}</td>
+                <td>{{ library.price }}</td>
+                <td>{{ library.event ? 'Yes' : 'No' }}</td>
+                <td>{{ library.protected ? 'Yes' : 'No' }}</td>
+                <td>{{ library.competition }}</td>
+                <td>{{ library.fiction ? 'Yes' : 'No' }}</td>
+                <td>{{ library.public ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('library_show', {'id': library.id}) }}">show</a>
+                    <a href="{{ path('library_edit', {'id': library.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('library_new') }}">Create new</a>
+{% endblock %}

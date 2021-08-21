@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block body %}
+    <h1>Library</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ library.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ library.title }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{{ library.author }}</td>
+            </tr>
+            <tr>
+                <th>Editor</th>
+                <td>{{ library.editor }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ library.price }}</td>
+            </tr>
+            <tr>
+                <th>Event</th>
+                <td>{{ library.event ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Protected</th>
+                <td>{{ library.protected ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Competition</th>
+                <td>{{ library.competition }}</td>
+            </tr>
+            <tr>
+                <th>Fiction</th>
+                <td>{{ library.fiction ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Public</th>
+                <td>{{ library.public ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('library_index') }}">back to list</a>
+
+    <a href="{{ path('library_edit', {'id': library.id}) }}">edit</a>
+
+    {{ include('library/_delete_form.html.twig') }}
+{% endblock %}
