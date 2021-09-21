@@ -1,0 +1,170 @@
+.navbar img {
+  margin-top: 2%;
+  width: 2rem;
+  height: auto;
+  margin: 1%;
+}
+.navbar .form-inline {
+  display: flex;
+  flex-flow: row;
+}
+
+#carousel .carousel-inner .carousel-item {
+  height: 150px;
+}
+#carousel .carousel-inner .carousel-item.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#carousel .carousel-indicators {
+  bottom: -15px;
+}
+#carousel .carousel-indicators li {
+  background-color: #FFFFFF22;
+  height: 5px;
+  width: 20px;
+  margin: 2px;
+}
+#carousel .carousel-indicators li.active {
+  background-color: #FFFFFFFF;
+}
+
+.card {
+  height: 350px;
+  background-color: transparent;
+  transition-duration: 0.5s;
+  margin: 2%;
+}
+
+.card-img {
+  position: absolute;
+  height: 100%;
+  z-index: -10;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  opacity: 0;
+  bottom: 0;
+  transition-duration: 0.5s;
+}
+
+.card:hover .card-body {
+  opacity: 1;
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+body {
+  background-color: dimgray;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white !important;
+}
+
+.image img {
+  width: 100%;
+  height: 20rem;
+}
+
+#footer {
+  margin-top: 1%;
+  display: flex;
+  flex-flow: row wrap;
+  background-color: black;
+}
+#footer .contact {
+  display: flex;
+  flex-flow: column;
+}
+#footer .contact a {
+  color: white !important;
+  text-decoration: none !important;
+}
+#footer .logo img {
+  background-color: transparent;
+  width: 2rem;
+  height: auto;
+  border-radius: 40%;
+  padding: 5%;
+  vertical-align: middle;
+}
+
+.compagny {
+  text-align: center;
+  font-size: 10px;
+}
+
+.book {
+  margin: 1%;
+}
+.book img {
+  width: auto;
+  height: 20rem;
+}
+.book .button {
+  text-align: center;
+}
+.book .button p {
+  font-size: 50%;
+}
+
+#livre .cover img {
+  height: 20rem;
+}
+#livre .presentation {
+  padding: 1%;
+}
+#livre .button {
+  display: flex;
+  justify-content: space-evenly;
+}
+#livre .sameauthor {
+  margin: 1%;
+}
+#livre .sameauthor img {
+  height: 10rem;
+}
+#livre .sameserie {
+  margin: 1%;
+}
+#livre .sameserie img {
+  height: 10rem;
+}
+
+.newbook {
+  flex-direction: row !important;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.sellmore {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.sold {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.librairie {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/*# sourceMappingURL=main.css.map */

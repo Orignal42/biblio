@@ -13,6 +13,7 @@ class ReaderType extends AbstractType
     {
         $builder
             ->add('username')
+            ->add('newsletter')
         ;
     }
 

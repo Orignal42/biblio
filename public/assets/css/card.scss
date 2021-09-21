@@ -1,0 +1,29 @@
+.card{
+    height: 350px;
+    background-color: transparent;
+    transition-duration: 0.5s;
+    margin: 2%;
+}
+.card-img{
+    position: absolute;
+    height: 100%;
+    z-index: -10;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    opacity: 0;
+    bottom: 0;
+    transition-duration: 0.5s;
+}
+.card:hover .card-body{
+    opacity: 1;
+}
+.card:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}

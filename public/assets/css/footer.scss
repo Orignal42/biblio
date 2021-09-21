@@ -1,0 +1,30 @@
+#footer{
+    margin-top: 1%;
+    display: flex;
+    flex-flow: row wrap;
+    background-color: black;
+    .contact{
+        display: flex;
+        flex-flow:column;
+        a{
+        color: white !important;
+        text-decoration: none !important;
+        }
+        
+    }
+    .logo{
+    img{
+        background-color: transparent;
+        width: 2rem;
+        height: auto;
+        border-radius: 40%;
+        padding: 5%;
+        vertical-align: middle;
+    }
+    }
+}
+
+.compagny{
+text-align: center;
+font-size: 10px;
+}

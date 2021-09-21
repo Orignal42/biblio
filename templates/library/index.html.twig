@@ -15,9 +15,13 @@
                 <th>Price</th>
                 <th>Event</th>
                 <th>Protected</th>
-                <th>Competition</th>
-                <th>Fiction</th>
                 <th>Public</th>
+                <th>Book</th>
+                <th>Cover</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>Abstract</th>
+                <th>Serie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -31,9 +35,13 @@
                 <td>{{ library.price }}</td>
                 <td>{{ library.event ? 'Yes' : 'No' }}</td>
                 <td>{{ library.protected ? 'Yes' : 'No' }}</td>
-                <td>{{ library.competition }}</td>
-                <td>{{ library.fiction ? 'Yes' : 'No' }}</td>
                 <td>{{ library.public ? 'Yes' : 'No' }}</td>
+                <td>{{ library.book }}</td>
+                <td>{{ library.cover }}</td>
+                <td>{{ library.createdAt ? library.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ library.updatedAt ? library.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ library.abstract }}</td>
+                <td>{{ library.serie }}</td>
                 <td>
                     <a href="{{ path('library_show', {'id': library.id}) }}">show</a>
                     <a href="{{ path('library_edit', {'id': library.id}) }}">edit</a>
@@ -41,7 +49,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="11">no records found</td>
+                <td colspan="15">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

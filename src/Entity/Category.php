@@ -22,6 +22,11 @@ class Category
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $fiction;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Category
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getFiction(): ?bool
+    {
+        return $this->fiction;
+    }
+
+    public function setFiction(bool $fiction): self
+    {
+        $this->fiction = $fiction;
 
         return $this;
     }

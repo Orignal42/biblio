@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Library;
-use App\Form\LibraryType;
+use App\Form\Library1Type;
 use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class LibraryController extends AbstractController
     public function new(Request $request): Response
     {
         $library = new Library();
-        $form = $this->createForm(LibraryType::class, $library);
+        $form = $this->createForm(Library1Type::class, $library);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class LibraryController extends AbstractController
      */
     public function edit(Request $request, Library $library): Response
     {
-        $form = $this->createForm(LibraryType::class, $library);
+        $form = $this->createForm(Library1Type::class, $library);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

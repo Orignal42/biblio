@@ -36,16 +36,32 @@
                 <td>{{ library.protected ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>Competition</th>
-                <td>{{ library.competition }}</td>
-            </tr>
-            <tr>
-                <th>Fiction</th>
-                <td>{{ library.fiction ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
                 <th>Public</th>
                 <td>{{ library.public ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Book</th>
+                <td>{{ library.book }}</td>
+            </tr>
+            <tr>
+                <th>Cover</th>
+                <td>{{ library.cover }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ library.createdAt ? library.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ library.updatedAt ? library.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Abstract</th>
+                <td>{{ library.abstract }}</td>
+            </tr>
+            <tr>
+                <th>Serie</th>
+                <td>{{ library.serie }}</td>
             </tr>
         </tbody>
     </table>

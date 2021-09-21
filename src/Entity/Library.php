@@ -49,15 +49,9 @@ class Library
      */
     private $protected;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $competition;
+ 
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $fiction;
+
 
     /**
      * @ORM\OneToOne(targetEntity=Category::class, cascade={"persist", "remove"})
@@ -78,6 +72,41 @@ class Library
      * @ORM\ManyToMany(targetEntity=Comment::class, mappedBy="book")
      */
     private $comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Competition::class, cascade={"persist", "remove"})
+     */
+    private $competition;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $book;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cover;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $abstract;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $serie;
 
     public function __construct()
     {
@@ -162,30 +191,6 @@ class Library
         return $this;
     }
 
-    public function getCompetition(): ?string
-    {
-        return $this->competition;
-    }
-
-    public function setCompetition(?string $competition): self
-    {
-        $this->competition = $competition;
-
-        return $this;
-    }
-
-    public function getFiction(): ?bool
-    {
-        return $this->fiction;
-    }
-
-    public function setFiction(bool $fiction): self
-    {
-        $this->fiction = $fiction;
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -263,6 +268,90 @@ class Library
         if ($this->comments->removeElement($comment)) {
             $comment->removeBook($this);
         }
+
+        return $this;
+    }
+
+    public function getCompetition(): ?Competition
+    {
+        return $this->competition;
+    }
+
+    public function setCompetition(?Competition $competition): self
+    {
+        $this->competition = $competition;
+
+        return $this;
+    }
+
+    public function getBook(): ?string
+    {
+        return $this->book;
+    }
+
+    public function setBook(string $book): self
+    {
+        $this->book = $book;
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getAbstract(): ?string
+    {
+        return $this->abstract;
+    }
+
+    public function setAbstract(string $abstract): self
+    {
+        $this->abstract = $abstract;
+
+        return $this;
+    }
+
+    public function getSerie(): ?string
+    {
+        return $this->serie;
+    }
+
+    public function setSerie(?string $serie): self
+    {
+        $this->serie = $serie;
 
         return $this;
     }

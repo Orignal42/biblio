@@ -1,0 +1,28 @@
+#livre{
+    .cover{
+    img{
+        height: 20rem;
+
+    }
+
+    }
+    .presentation{
+       padding:1%;
+    }
+    .button{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .sameauthor{
+        margin: 1%;
+        img{
+            height: 10rem;
+        }
+    }
+    .sameserie{
+        margin: 1%;
+        img{
+            height: 10rem;
+        }
+    }
+}

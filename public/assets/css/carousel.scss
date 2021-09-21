@@ -1,0 +1,25 @@
+#carousel{
+    .carousel-inner{
+        .carousel-item{
+            height: 150px;
+        }
+        .carousel-item.active{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+    .carousel-indicators{
+        bottom: -15px;
+        li{
+            background-color: #FFFFFF22;
+            height: 5px;
+            width: 20px;
+            margin: 2px;
+        }
+        li.active{
+            background-color: #FFFFFFFF;
+        }
+    }
+}
