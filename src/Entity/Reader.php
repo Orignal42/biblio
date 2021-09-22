@@ -35,10 +35,13 @@ class Reader
     private $orders;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="reader", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-
     private $user;
+
+
+ 
 
     public function __construct()
     {
@@ -109,10 +112,12 @@ class Reader
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
+//pour la relation entre les 2 tables en OneToOne il faut metre yes pour que l'échange se fassent entre les 2 classes
+
 }

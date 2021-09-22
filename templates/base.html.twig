@@ -39,7 +39,7 @@
                   <a class="dropdown-item" href="#">Les plus vendus</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Fantastique</a>
-                  <a class="dropdown-item" href="#">Fantaisy</a>
+                  <a class="dropdown-item" href="#">Fantasy</a>
                   <a class="dropdown-item" href="#">Science-fiction</a>
                   <a class="dropdown-item" href="#">Romance</a>
                   <a class="dropdown-item" href="#">Poeme</a>
@@ -50,7 +50,7 @@
               </li>
                     {% if is_granted('ROLE_USER') %}
                <li class="nav-item">
-                <a class="nav-link" href="{{path('reader_edit',{'id':app.user.id})}}">Compte</a>
+                <a class="nav-link" href="{{path('reader_edit',{'id':app.user.reader.id})}}">Compte</a>
               </li>
                <li class="nav-item">
                 <a class="nav-link" href="{{path('library_index')}}">Bibliothèque</a>

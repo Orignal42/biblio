@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
+
 /**
  * @Route("/library")
  */
@@ -28,14 +32,22 @@ class LibraryController extends AbstractController
     /**
      * @Route("/new", name="library_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, SluggerInterface $slugger): Response
     {
         $library = new Library();
         $form = $this->createForm(LibraryType::class, $library);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
+            $cover = $form->get('cover')->getData();
+            $book=$form->get('book')->getData();
             $entityManager = $this->getDoctrine()->getManager();
+            if($cover){
+                $library->setCover($this->uploadFile($cover, $slugger, 'cover_directory'));
+            }
+            if($book){
+                $library->setBook($this->uploadFile($book, $slugger, 'book_directory'));
+            }
             $entityManager->persist($library);
             $entityManager->flush();
 

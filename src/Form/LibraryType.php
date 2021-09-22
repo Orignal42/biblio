@@ -23,7 +23,21 @@ class LibraryType extends AbstractType
             ->add('event')
             ->add('protected')
             ->add('public')
-            ->add('book')
+            ->add('book'
+            , FileType::class,[
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '20000000k',
+                        'mimeTypes' => [
+                            'application/*',
+                            ],
+                        'mimeTypesMessage' => 'Please upload a valid document',
+                        ])
+                    ],
+                ]
+            )
              ->add('cover'
             , FileType::class,[
                 'mapped' => false,
@@ -32,13 +46,8 @@ class LibraryType extends AbstractType
                     new File([
                         'maxSize' => '20000000k',
                         'mimeTypes' => [
-                            'image/png',
-                            'application/x-pdf',
-                            'application/pdf',
-                            'image/jpg',
-                               'image/jpeg',
-                            'image/gif',
-                        ],
+                            'image/*',
+                            ],
                         'mimeTypesMessage' => 'Please upload a valid document',
                         ])
                     ],

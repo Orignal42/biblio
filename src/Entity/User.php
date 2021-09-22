@@ -43,6 +43,14 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Reader::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $reader;
+
+
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,4 +145,22 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getReader(): ?Reader
+    {
+        return $this->reader;
+    }
+
+    public function setReader(Reader $reader): self
+    {
+        // set the owning side of the relation if necessary
+        if ($reader->getUser() !== $this) {
+            $reader->setUser($this);
+        }
+
+        $this->reader = $reader;
+
+        return $this;
+    }
+
 }

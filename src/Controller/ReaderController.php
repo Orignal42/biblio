@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("C")
+ * @Route("/reader")
  */
 class ReaderController extends AbstractController
 {
@@ -69,11 +69,9 @@ class ReaderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('reader_index');
+         ;
         }
-        return $this->redirectToRoute('reader_edit',[
-            'id'=>$reader->getId()
-        ]);
+
 
         return $this->render('reader/edit.html.twig', [
             'reader' => $reader,
