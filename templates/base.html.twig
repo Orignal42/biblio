@@ -29,9 +29,7 @@
               <li class="nav-item active">
                 <a class="nav-link" href="{{path('home')}}"><img src="{{ asset ('assets/images/book-18.gif')}}"> </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
+            
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  Selection
@@ -50,15 +48,25 @@
                   <a class="dropdown-item" href="#">Histoire</a>
                 </div>
               </li>
+                    {% if is_granted('ROLE_USER') %}
                <li class="nav-item">
-                <a class="nav-link" href="{{path('app_login')}}">Bibliothèque</a>
+                <a class="nav-link" href="{{path('reader_edit',{'id':app.user.id})}}">Compte</a>
               </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{{path('library_index')}}">Bibliothèque</a>
+              </li>
+                </li>
+                    <li class="nav-item">
+                <a class="nav-link" href="{{path('app_logout')}}">Déconnection</a>
+              </li>
+                         {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{{path('app_login')}}">Connection</a>
-              </li>
+            
                <li class="nav-item">
                 <a class="nav-link" href="{{path('app_register')}}">Création de compte</a>
               </li>
+                      {% endif %}
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -72,7 +80,7 @@
         <main class="page">
             {% block body %}{% endblock %}
         </main>
-
+<vardump{user.id}>
        <footer id="footer">
       <div class="col-3"></div>
       <div class="contact">
@@ -90,8 +98,6 @@
 
     </footer>
 
-    <p class='compagny'>Il n'y a rien de tout ça vu que je n'existe pas
-      &#x00AE;</p>
        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>

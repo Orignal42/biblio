@@ -20,12 +20,12 @@ class Reader
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
+    * @ORM\Column(type="string", length=255,  nullable=true)
+    */
     private $username;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $newsletter;
 
@@ -33,6 +33,12 @@ class Reader
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="reader")
      */
     private $orders;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+
+    private $user;
 
     public function __construct()
     {
@@ -94,6 +100,18 @@ class Reader
                 $order->setReader(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

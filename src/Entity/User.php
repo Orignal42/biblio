@@ -36,10 +36,7 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Reader::class, cascade={"persist", "remove"})
-     */
-    private $reader;
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -127,17 +124,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getReader(): ?Reader
-    {
-        return $this->reader;
-    }
 
-    public function setReader(?Reader $reader): self
-    {
-        $this->reader = $reader;
-
-        return $this;
-    }
 
     public function isVerified(): bool
     {

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Reader;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\SecurityAuthenticator;
@@ -42,6 +43,15 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            //Permet de creer le client et de transferer l'id user 
+            $reader = new Reader();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $reader->setUser($user);
+            $entityManager->persist($reader);
+            $entityManager->flush();
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

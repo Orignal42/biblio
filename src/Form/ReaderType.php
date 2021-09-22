@@ -6,6 +6,10 @@ use App\Entity\Reader;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Form\RegistrationFormType;
+
+
 
 class ReaderType extends AbstractType
 {
@@ -13,7 +17,13 @@ class ReaderType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('newsletter')
+            ->add('newsletter', ChoiceType::class, [
+                'choices'  => [                    
+                    'Oui' => true,
+                    'Non' => false,
+                ],
+            ])
+        
         ;
     }
 

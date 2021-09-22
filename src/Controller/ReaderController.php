@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/reader")
+ * @Route("C")
  */
 class ReaderController extends AbstractController
 {
@@ -71,11 +71,16 @@ class ReaderController extends AbstractController
 
             return $this->redirectToRoute('reader_index');
         }
+        return $this->redirectToRoute('reader_edit',[
+            'id'=>$reader->getId()
+        ]);
 
         return $this->render('reader/edit.html.twig', [
             'reader' => $reader,
             'form' => $form->createView(),
+            'id'=>$reader->getId()
         ]);
+     
     }
 
     /**

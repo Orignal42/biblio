@@ -66,7 +66,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('library_index') }}">back to list</a>
+    <a href="{{ path('library_index', {'id': library.id}) }}">back to list</a>
 
     <a href="{{ path('library_edit', {'id': library.id}) }}">edit</a>
 

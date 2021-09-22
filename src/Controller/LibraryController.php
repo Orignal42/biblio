@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Library;
-use App\Form\Library1Type;
+use App\Form\LibraryType;
 use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 /**
  * @Route("/library")
  */
@@ -31,7 +31,7 @@ class LibraryController extends AbstractController
     public function new(Request $request): Response
     {
         $library = new Library();
-        $form = $this->createForm(Library1Type::class, $library);
+        $form = $this->createForm(LibraryType::class, $library);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class LibraryController extends AbstractController
      */
     public function edit(Request $request, Library $library): Response
     {
-        $form = $this->createForm(Library1Type::class, $library);
+        $form = $this->createForm(LibraryType::class, $library);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -90,5 +90,29 @@ class LibraryController extends AbstractController
         }
 
         return $this->redirectToRoute('library_index');
+    }
+
+
+
+    public function uploadFile($file, $slugger, $targetDirectory){
+
+        if ($file) {
+
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+            try {
+                $file->move(
+                    $this->getParameter($targetDirectory),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+            return $newFilename;
+
+        }
     }
 }
