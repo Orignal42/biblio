@@ -48,16 +48,19 @@
           <div class="row">
             <h1>Nouveauté</h1>
             <div class=newbook>
+              {% for librar in library %}
            <div class="card" style="width: 18rem;">
-          <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
+          <img class="card-img" src='uploads/cover/{{librar.cover}}' alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title text-white text-center">La guerre du jour</h5>
+          <h5 class="card-title text-white text-center">{{ librar.title}}  </h5>
           <p class="text-white text-center">Acheter</p>
-          <a href="#" class="btn btn-secondary">20.99€</a>
-          <a href="#" class="btn btn-warning">detail</a>
+          <a href="#" class="btn btn-secondary">{{ librar.price}}€</a>
+          <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
             
         </div>
+                   
       </div>
+       {% endfor %}
              <div class="card" style="width: 18rem;">
           <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
         <div class="card-body">
