@@ -33,15 +33,11 @@ class Order
      */
     private $status;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $api_status_response;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $methodpayment;
+
+ 
+
+
 
     public function getId(): ?int
     {
@@ -84,27 +80,8 @@ class Order
         return $this;
     }
 
-    public function getApiStatusResponse(): ?string
-    {
-        return $this->api_status_response;
-    }
 
-    public function setApiStatusResponse(?string $api_status_response): self
-    {
-        $this->api_status_response = $api_status_response;
 
-        return $this;
-    }
 
-    public function getMethodpayment(): ?string
-    {
-        return $this->methodpayment;
-    }
 
-    public function setMethodpayment(string $methodpayment): self
-    {
-        $this->methodpayment = $methodpayment;
-
-        return $this;
-    }
 }

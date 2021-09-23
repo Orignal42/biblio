@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Order;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,11 +13,10 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status')
-            ->add('api_status_response')
-            ->add('methodpayment')
-            ->add('reader')
-            ->add('library')
+            ->add('nom',TextType::class,[
+                'mapped'=>false
+            ])           
+  
         ;
     }
 

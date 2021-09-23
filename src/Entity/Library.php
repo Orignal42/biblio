@@ -54,7 +54,7 @@ class Library
 
 
     /**
-     * @ORM\OneToOne(targetEntity=Category::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Category::class, cascade={"persist", "remove"})
      */
     private $category;
 
@@ -354,5 +354,10 @@ class Library
         $this->serie = $serie;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getId();
     }
 }

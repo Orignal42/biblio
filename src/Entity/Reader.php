@@ -112,6 +112,11 @@ class Reader
         return $this->user;
     }
 
+    public function __toString(): string
+    {
+        return $this->getId();
+    }
+
     public function setUser(User $user): self
     {
         $this->user = $user;

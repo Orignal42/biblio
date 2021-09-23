@@ -10,8 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Status</th>
-                <th>Api_status_response</th>
-                <th>Methodpayment</th>
+               
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,8 +19,8 @@
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.status }}</td>
-                <td>{{ order.apiStatusResponse }}</td>
-                <td>{{ order.methodpayment }}</td>
+              
+             
                 <td>
                     <a href="{{ path('order_show', {'id': order.id}) }}">show</a>
                     <a href="{{ path('order_edit', {'id': order.id}) }}">edit</a>
@@ -35,5 +34,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('order_new') }}">Create new</a>
+    <a href="{{ path('home') }}">Create new</a>
 {% endblock %}
