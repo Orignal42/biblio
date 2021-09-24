@@ -108,6 +108,11 @@ class Library
      */
     private $serie;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true))
+     */
+    private $soldprice;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -359,5 +364,17 @@ class Library
     public function __toString(): string
     {
         return $this->getId();
+    }
+
+    public function getSoldprice(): ?int
+    {
+        return $this->soldprice;
+    }
+
+    public function setSoldprice(int $soldprice): self
+    {
+        $this->soldprice = $soldprice;
+
+        return $this;
     }
 }

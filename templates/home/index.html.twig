@@ -67,7 +67,11 @@
          {% if app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id %}  
           <a href="uploads/book/{{ librar.book}}" class="btn btn-secondary">Download</a>
           {% else %}
-         <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
+            {% if librar.soldprice != null %}
+            <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.soldprice}}€</a>
+           {% else %}
+           <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
+          {% endif %}
 
  
 {% endif %}
@@ -109,7 +113,11 @@
          {% if app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id  %}  
           <a href="uploads/book/{{ librar.book}}" class="btn btn-secondary">Download</a>
           {% else %}
-         <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
+          {% if librar.soldprice != null %}
+            <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.soldprice}}€</a>
+           {% else %}
+           <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
+          {% endif %}
 
  
 {% endif %}
