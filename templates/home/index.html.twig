@@ -86,78 +86,50 @@
         
             </div>
 
-            <h1>Les plus vendus</h1>
-            <div class=sellmore>
-             <div class="card" style="width: 18rem;">
-          <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title text-white text-center">La guerre du jour</h5>
-          <p class="text-white text-center">Acheter</p>
-          <a href="#" class="btn btn-secondary">20.99€</a>
-          <a href="#" class="btn btn-warning">detail</a>
-            
-        </div>
-      </div>
-
-             <div class="card" style="width: 18rem;">
-          <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title text-white text-center">La guerre du jour</h5>
-          <p class="text-white text-center">Acheter</p>
-          <a href="#" class="btn btn-secondary">20.99€</a>
-          <a href="#" class="btn btn-warning">detail</a>
-            
-        </div>
-      </div>
-           <div class="card" style="width: 18rem;">
-          <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title text-white text-center">La guerre du jour</h5>
-          <p class="text-white text-center">Acheter</p>
-          <a href="#" class="btn btn-secondary">20.99€</a>
-          <a href="#" class="btn btn-warning">detail</a>
-            
-        </div>
-      </div>
-            </div>
-
+          
 
             <h1>En soldes</h1>
             <div class=sold>
-             <div class="card" style="width: 18rem;">
-          <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
+           {% for librar in library %}   
+              {% if librar.event == 1 %} 
+           <div class="card" style="width: 18rem;">
+          <img class="card-img" src='uploads/cover/{{librar.cover}}' alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title text-white text-center">La guerre du jour</h5>
-          <p class="text-white text-center">Acheter</p>
-          <a href="#" class="btn btn-secondary">20.99€</a>
-          <a href="#" class="btn btn-warning">detail</a>
-            
-        </div>
-      </div>
+          <h5 class="card-title text-white text-center">{{ librar.title}}  </h5>
+     
 
-          <div class="card" style="width: 18rem;">
-          <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title text-white text-center">La guerre du jour</h5>
-          <p class="text-white text-center">Acheter</p>
-          <a href="#" class="btn btn-secondary">20.99€</a>
-          <a href="#" class="btn btn-warning">detail</a>
-            
-        </div>
-      </div>
 
-            <div class="card" style="width: 18rem;">
-          <img class="card-img" src="{{asset('assets/images/La guerre du jour.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title text-white text-center">La guerre du jour</h5>
-          <p class="text-white text-center">Acheter</p>
-          <a href="#" class="btn btn-secondary">20.99€</a>
-          <a href="#" class="btn btn-warning">detail</a>
+
+           {% if is_granted('ROLE_USER') %}
+           
+                <p class="text-white text-center">Acheter</p>
             
+         {% for order in orders  %} 
+
+         {% if app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id  %}  
+          <a href="uploads/book/{{ librar.book}}" class="btn btn-secondary">Download</a>
+          {% else %}
+         <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
+
+ 
+{% endif %}
+ {% endfor %}
+           
+            <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
+           {% else %}
+             <a  href="{{path('app_register')}}"  class="btn btn-secondary">Création de compte</a>
+              <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
+             {% endif %}
+     
         </div>
+                   
       </div>
+  
+       {% else %}
+      {% endif %}
+              {% endfor %}
             </div>
-          </div>
+
         </div>
       </div>
 
