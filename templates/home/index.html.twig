@@ -49,21 +49,36 @@
             <h1>Nouveauté</h1>
             <div class=newbook>
               {% for librar in library %}
+              
            <div class="card" style="width: 18rem;">
           <img class="card-img" src='uploads/cover/{{librar.cover}}' alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title text-white text-center">{{ librar.title}}  </h5>
-                  {% if is_granted('ROLE_USER') %}
-          <p class="text-white text-center">Acheter</p>
-          <input type='hidden' value='{{ librar.price}}'/>
-          <input type="hidden" value="stripe" name="payment">
-              <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
-           <a href="uploads/book/{{ librar.book}}" class="btn btn-secondary">Download</a>
+     
+
+
+
+           {% if is_granted('ROLE_USER') %}
+           
+                <p class="text-white text-center">Acheter</p>
+            
+         {% for order in orders  %} 
+
+         {% if app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id %}  
+          <a href="uploads/book/{{ librar.book}}" class="btn btn-secondary">Download</a>
+          {% else %}
+         <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
+
+ 
+{% endif %}
+ {% endfor %}
+           
+            <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
            {% else %}
              <a  href="{{path('app_register')}}"  class="btn btn-secondary">Création de compte</a>
+              <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
              {% endif %}
-          <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
-            
+     
         </div>
                    
       </div>

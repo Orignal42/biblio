@@ -123,6 +123,6 @@ class Reader
 
         return $this;
     }
-//pour la relation entre les 2 tables en OneToOne il faut metre yes pour que l'échange se fassent entre les 2 classes
+//pour la relation entre les 2 tables en OneToOne il faut mettre yes pour que l'échange se fassent entre les 2 classes
 
 }

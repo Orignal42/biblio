@@ -47,4 +47,20 @@ class OrderRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // public function FindAllWithJoin()
+    // {
+    //     $entityManager = $this->getEntityManager();
+    //     $query = $entityManager->createQuery(
+    //         'SELECT DISTINCT 
+    //             order,
+    //             reader
+    //         FROM 
+    //             App\Entity\Order order
+    //         JOIN
+    //             Reader.id reader            '
+    //     );
+    //     return $query->getResult();
+
+    // }
 }

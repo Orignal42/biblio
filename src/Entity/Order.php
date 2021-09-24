@@ -28,8 +28,9 @@ class Order
      */
     private $library;
 
+    
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $status;
 

@@ -35,15 +35,17 @@ class OrderController extends AbstractController
     {
         $order = new Order();
         $order->setlibrary($library); 
-        // dd($this->getUser()->getReader()
+        //permet de recuperer les id du client
+        // dd($this->getUser()->getReader())
         $order->setReader($this->getUser()->getReader());
-       
-        $order->setStatus('WAITING');
+        $order->setStatus(0);
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+         
             $entityManager = $this->getDoctrine()->getManager();
+            //permet de recuperer l'id du livre
             $library=$libraryRepository->findOneBy(['id'=>$order->getLibrary()]);
             \Stripe\Stripe::setApiKey('sk_test_51IudYJE6zq9JtjMeKaLVqVeD5DU44TdEw2kFMuak62VLwymNNoUTQpvqJEgaHZCAzh10DAo6f6P9O4bJsLc5qzSY00IVms15NF');
             $paymentIntent = \Stripe\PaymentIntent::create([

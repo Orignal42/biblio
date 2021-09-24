@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Reader;
+use App\Entity\User;
+use App\Entity\Order;
 use App\Form\ReaderType;
 use App\Repository\ReaderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
