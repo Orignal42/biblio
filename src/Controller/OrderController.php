@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Library;
 use App\Entity\Order;
-use App\Form\LibraryType;
+use App\Entity\Category;
 use App\Repository\LibraryRepository;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
@@ -23,8 +23,14 @@ class OrderController extends AbstractController
      */
     public function index(OrderRepository $orderRepository ): Response
     {
+
+        $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+       
+        ->findAll();
         return $this->render('order/index.html.twig', [
             'orders' => $orderRepository->findAll(),
+            'categorys'=>$category,
         ]);
     }
 
@@ -33,6 +39,11 @@ class OrderController extends AbstractController
      */
     public function new(Request $request,LibraryRepository $libraryRepository, Library $library): Response
     {
+        $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+       
+        ->findAll();
+
         $order = new Order();
         $order->setlibrary($library); 
         //permet de recuperer les id du client
@@ -64,6 +75,7 @@ class OrderController extends AbstractController
         return $this->render('order/new.html.twig', [
             'order' => $order,
             'form' => $form->createView(),
+            'categorys'=>$category,
         ]);
         
 
@@ -79,9 +91,13 @@ class OrderController extends AbstractController
      * @Route("/{id}", name="order_show", methods={"GET"})
      */
     public function show(Order $order): Response
-    {
+    {     $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+       
+        ->findAll();
         return $this->render('order/show.html.twig', [
             'order' => $order,
+            'categorys'=>$category,
         ]);
     }
 
@@ -90,6 +106,13 @@ class OrderController extends AbstractController
      */
     public function edit(Request $request, Order $order): Response
     {
+        $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+       
+        ->findAll();
+
+
+
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
@@ -102,6 +125,7 @@ class OrderController extends AbstractController
         return $this->render('order/edit.html.twig', [
             'order' => $order,
             'form' => $form->createView(),
+            'categorys'=>$category,
         ]);
     }
 

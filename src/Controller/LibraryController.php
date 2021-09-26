@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Library;
+use App\Entity\Category;
 use App\Form\LibraryType;
 use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
-
 
 /**
  * @Route("/library")
@@ -24,8 +24,15 @@ class LibraryController extends AbstractController
      */
     public function index(LibraryRepository $libraryRepository): Response
     {
+
+        $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+        ->findAll();
+
         return $this->render('library/index.html.twig', [
             'libraries' => $libraryRepository->findAll(),
+            'categorys'=>$category
+        
         ]);
     }
 
@@ -65,8 +72,13 @@ class LibraryController extends AbstractController
      */
     public function show(Library $library): Response
     {
+        $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+        ->findAll();
+        
         return $this->render('library/show.html.twig', [
             'library' => $library,
+            'categorys'=>$category
         ]);
     }
 
@@ -75,6 +87,7 @@ class LibraryController extends AbstractController
      */
     public function edit(Request $request, Library $library): Response
     {
+        
         $form = $this->createForm(LibraryType::class, $library);
         $form->handleRequest($request);
 

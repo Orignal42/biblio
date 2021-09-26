@@ -7,6 +7,38 @@
 
     {{ include('reader/_form.html.twig', {'button_label': 'Update'}) }}
 
+
+    <section id="library">
+      <div class="books">
+        <div class="container">
+          <div class="row">
+           
+            <div class=newbook>
+                {% for librar in library %}
+                    {% for order in orders %}
+                     {% if app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id  %}  
+                          <div class="card" style="width: 18rem;">
+                                <img class="card-img" src="{{ asset ('uploads/cover/' ~ librar.cover)}}" alt="Card image cap">
+                             <div class="card-body">
+                                 <h5 class="card-title text-white text-center">{{ librar.title}}  </h5>      
+                                 <a href="{{asset ('uploads/book/' ~ librar.book)}}" class="btn btn-success">Download</a>
+                                  <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>      
+                              </div>
+                             </div>
+                     {% endif  %}
+                    {% endfor %}
+                {% endfor %}
+        
+            </div>
+
+          
+
+            </div>
+
+        </div>
+      </div>
+
+    </section>
     <a href="{{ path('reader_index') }}">back to list</a>
 
     {{ include('reader/_delete_form.html.twig') }}

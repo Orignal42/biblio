@@ -34,19 +34,14 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  Selection
                 </a>
-                {# <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Nouveauté</a>
-                  <a class="dropdown-item" href="#">Les plus vendus</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Fantastique</a>
-                  <a class="dropdown-item" href="#">Fantasy</a>
-                  <a class="dropdown-item" href="#">Science-fiction</a>
-                  <a class="dropdown-item" href="#">Romance</a>
-                  <a class="dropdown-item" href="#">Poeme</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Psychologie</a>
-                  <a class="dropdown-item" href="#">Histoire</a>
-                </div> #}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                {% for category in categorys %}
+                  <a class="dropdown-item" href=" {{path('library_index')}}">{{ category.type }}</a>
+           
+                  
+              {% endfor %}
+                </div>
               </li>
                     {% if is_granted('ROLE_USER') %}
                <li class="nav-item">
@@ -68,7 +63,8 @@
               </li>
                       {% endif %}
 
-                         {% if is_granted('ROLE_USER') %}      <li class="nav-item">
+                         {% if is_granted('ROLE_ADMIN') %}   
+                            <li class="nav-item">
                 <a class="nav-link" href="{{path('admin')}}">ADMIN</a>
               </li> {% endif %}
             </ul>

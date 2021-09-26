@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reader;
-use App\Entity\User;
+use App\Entity\Library;
 use App\Entity\Order;
 use App\Form\ReaderType;
 use App\Repository\ReaderRepository;
@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Category;
+
 
 /**
  * @Route("/reader")
@@ -22,8 +24,14 @@ class ReaderController extends AbstractController
      */
     public function index(ReaderRepository $readerRepository): Response
     {
+        $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+        ->findAll();
+
         return $this->render('reader/index.html.twig', [
             'readers' => $readerRepository->findAll(),
+       
+            'categorys'=>$category
         ]);
     }
 
@@ -65,8 +73,19 @@ class ReaderController extends AbstractController
      */
     public function edit(Request $request, Reader $reader): Response
     {
+
+        $library = $this->getDoctrine()
+        ->getRepository(Library::class)
+        ->findAll();
+
+        $order = $this->getDoctrine()
+        ->getRepository(Order::class)
+        ->findAll();
+
         $form = $this->createForm(ReaderType::class, $reader);
         $form->handleRequest($request);
+
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -74,11 +93,18 @@ class ReaderController extends AbstractController
          ;
         }
 
+        $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+        ->findAll();
+
 
         return $this->render('reader/edit.html.twig', [
             'reader' => $reader,
             'form' => $form->createView(),
-            'id'=>$reader->getId()
+            'id'=>$reader->getId(),
+            'categorys'=>$category,
+            'library'=>$library,
+            'orders'=>$order
         ]);
      
     }

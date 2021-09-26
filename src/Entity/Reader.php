@@ -41,6 +41,8 @@ class Reader
     private $user;
 
 
+
+
  
 
     public function __construct()
@@ -124,5 +126,7 @@ class Reader
         return $this;
     }
 //pour la relation entre les 2 tables en OneToOne il faut mettre yes pour que l'échange se fassent entre les 2 classes
+
+
 
 }

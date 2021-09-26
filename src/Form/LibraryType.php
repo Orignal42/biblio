@@ -60,6 +60,7 @@ class LibraryType extends AbstractType
             ->add('category')
             ->add('comments')
             ->add('competition')
+            ->add ('soldprice')
         ;
     }
 

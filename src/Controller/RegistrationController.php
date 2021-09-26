@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Category;
 use App\Entity\User;
 use App\Entity\Reader;
 use App\Form\RegistrationFormType;
@@ -30,7 +30,11 @@ class RegistrationController extends AbstractController
      * @Route("/register", name="app_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, SecurityAuthenticator $authenticator): Response
-    {
+    {    $category = $this->getDoctrine()  
+        ->getRepository(Category::class)
+        ->findAll();
+
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -71,12 +75,13 @@ class RegistrationController extends AbstractController
                 $user,
                 $request,
                 $authenticator,
-                'main' // firewall name in security.yaml
+                'main', // firewall name in security.yaml
             );
         }
-
+        
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'categorys'=>$category,
         ]);
     }
 
@@ -85,6 +90,8 @@ class RegistrationController extends AbstractController
      */
     public function verifyUserEmail(Request $request): Response
     {
+
+    
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // validate email confirmation link, sets User::isVerified=true and persists
@@ -100,5 +107,6 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_register');
+        
     }
 }

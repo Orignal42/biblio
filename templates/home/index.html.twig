@@ -10,7 +10,7 @@
     </div>
 </section>
 
-    <section id=carousel>
+    <section id='carousel'>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -48,98 +48,71 @@
           <div class="row">
             <h1>Nouveauté</h1>
             <div class=newbook>
-              {% for librar in library %}
+              {% for order in orders %}
               
-           <div class="card" style="width: 18rem;">
-          <img class="card-img" src='uploads/cover/{{librar.cover}}' alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title text-white text-center">{{ librar.title}}  </h5>
-     
-
-
-
-           {% if is_granted('ROLE_USER') %}
-           
-                <p class="text-white text-center">Acheter</p>
-            
-         {% for order in orders  %} 
-
-         {% if app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id %}  
-          <a href="uploads/book/{{ librar.book}}" class="btn btn-secondary">Download</a>
-          {% else %}
-            {% if librar.soldprice != null %}
-            <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.soldprice}}€</a>
-           {% else %}
-           <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
-          {% endif %}
-
- 
-{% endif %}
- {% endfor %}
-           
-            <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
-           {% else %}
-             <a  href="{{path('app_register')}}"  class="btn btn-secondary">Création de compte</a>
-              <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
-             {% endif %}
-     
-        </div>
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img" src='uploads/cover/{{order.library.cover}}' alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title text-white text-center">{{ order.library.title}}  </h5>
+                      {% if is_granted('ROLE_USER') %}
+                            {{ dump ( is_granted('ROLE_USER')) }} 
+                        
+                            {% if  app.user.reader.id == order.reader.id and  order.status == 1 %}
+                           {# {{ dump (app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id ) }}   #}
+                            <a href="uploads/book/{{ order.library.book}}" class="btn btn-success">Download</a>
+                           {% else %}
+                            <p class="text-white text-center">Acheter</p>
+                              <a href="{{path('order_new',{'id':order.library.id})}}" class="btn btn-secondary">{{ order.library.price}}€</a>
+                          {% endif %} 
+                         
+                            
+                          <a href="{{ path ('library_show',{'id':order.library.id})}}" class="btn btn-warning">détail</a>
+                         {% else %}
+                          <a  href="{{path('app_register')}}"  class="btn btn-danger">Création de compte</a>
+                          <a href="{{ path ('library_show',{'id':order.library.id})}}" class="btn btn-warning">détail</a>
                    
-      </div>
-       {% endfor %}
-        
+                   {% endif %}
+                    </div> 
+              </div>
+              {% endfor %} 
             </div>
 
           
 
-            <h1>En soldes</h1>
-            <div class=sold>
-           {% for librar in library %}   
-              {% if librar.event == 1 %} 
-           <div class="card" style="width: 18rem;">
-          <img class="card-img" src='uploads/cover/{{librar.cover}}' alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title text-white text-center">{{ librar.title}}  </h5>
-     
-
-
-
-           {% if is_granted('ROLE_USER') %}
-           
-                <p class="text-white text-center">Acheter</p>
-            
-         {% for order in orders  %} 
-
-         {% if app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id  %}  
-          <a href="uploads/book/{{ librar.book}}" class="btn btn-secondary">Download</a>
-          {% else %}
-          {% if librar.soldprice != null %}
-            <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.soldprice}}€</a>
-           {% else %}
-           <a href="{{path('order_new',{'id':librar.id})}}" class="btn btn-secondary">{{ librar.price}}€</a>
-          {% endif %}
-
- 
-{% endif %}
- {% endfor %}
-           
-            <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
-           {% else %}
-             <a  href="{{path('app_register')}}"  class="btn btn-secondary">Création de compte</a>
-              <a href="{{ path ('library_show',{'id':librar.id})}}" class="btn btn-warning">détail</a>
-             {% endif %}
-     
-        </div>
+       <h1>En soldes</h1>
+        <div class=sold>
+          {% for order in orders %}
+              {% if order.library.event == 1 %}
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img" src='uploads/cover/{{order.library.cover}}' alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title text-white text-center">{{ order.library.title}}  </h5>
+                      {% if is_granted('ROLE_USER') %}
+                            {{ dump ( is_granted('ROLE_USER')) }} 
+                        
+                            {% if   order.status == 1 %}
+                           {# {{ dump (app.user.reader.id == order.reader.id and  order.status == 1 and  librar.id == order.library.id ) }}   #}
+                            <a href="uploads/book/{{ order.library.book}}" class="btn btn-success">Download</a>
+                           {% else %}
+                            <p class="text-white text-center">Acheter</p>
+                              <a href="{{path('order_new',{'id':order.library.id})}}" class="btn btn-secondary">{{ order.library.price}}€</a>
+                          {% endif %} 
+                         
+                            
+                          <a href="{{ path ('library_show',{'id':order.library.id})}}" class="btn btn-warning">détail</a>
+                         {% else %}
+                          <a  href="{{path('app_register')}}"  class="btn btn-danger">Création de compte</a>
+                          <a href="{{ path ('library_show',{'id':order.library.id})}}" class="btn btn-warning">détail</a>
                    
-      </div>
-  
-       {% else %}
-      {% endif %}
-              {% endfor %}
+                   {% endif %}
+                    </div> 
+              </div>
+                 {% endif %}
+              {% endfor %} 
             </div>
+       </div>
+    </div>
+  </div>
 
-        </div>
-      </div>
-
-    </section>
+</section>
 {% endblock %}
